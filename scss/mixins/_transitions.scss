@@ -1,0 +1,15 @@
+/* TRANSITIONS */
+// 
+// Affect transitions
+
+@mixin transition($time) {
+    transition: all $time ease-in-out;
+}
+
+@mixin transition-delay($time) {
+    transition: all .5s ease $time;
+}
+
+@mixin delay($time) {
+    transition-delay: $time;
+}

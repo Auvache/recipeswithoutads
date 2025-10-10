@@ -1,0 +1,56 @@
+//
+// Flex Mixins
+//
+// Foundational Flex mixins
+
+@mixin flexbox-display-flex {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+@mixin flexbox-display-inline-flex {
+  display: -webkit-inline-box;
+  display: -moz-inline-box;
+  display: -ms-inline-flexbox;
+  display: -webkit-inline-flex;
+  display: inline-flex;
+}
+
+@mixin flexbox-flex($flex-number, $width) {
+  -webkit-box-flex: $flex-number;
+  -moz-box-flex: $flex-number;
+  width: $width;
+  -webkit-flex: $flex-number;
+  -ms-flex: $flex-number;
+  flex: $flex-number;
+}
+
+@mixin flexbox-order($order) {
+  -webkit-box-ordinal-group: $order;
+  -moz-box-ordinal-group: $order;
+  -ms-flex-order: $order;
+  -webkit-order: $order;
+  order: $order;
+}
+
+@mixin flexbox-flex-grow($number) {
+  -ms-flex-positive: $number;
+  flex-grow: $number;
+}
+
+@mixin flexbox-flex-shrink($number) {
+  -ms-flex-negative: $number;
+  flex-shrink: $number;
+}
+
+@mixin flexbox-flex-basis($number) {
+  -ms-flex-preferred-size: $number;
+  flex-basis: $number;
+}
+
+.flex-basis-auto {
+  flex-basis: auto;
+}

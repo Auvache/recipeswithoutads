@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Bacon and Eggs",
+    "slug": "bacon-and-eggs",
+    "summary": "5 minutes",
+    "ingredients": [
+      "2 eggs",
+      "3 strips of bacon"
+    ],
+    "steps": [
+      "fry eggs",
+      "fry bacon",
+      "eat together"
+    ]
+  }
+]

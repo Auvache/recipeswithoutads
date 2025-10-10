@@ -1,0 +1,53 @@
+/* RESPONSIVE BREAKPOINTS */
+// 
+// Apply breakpoints
+
+@mixin breakpoint($point) {
+  @if $point == xxs {
+    @media screen and (max-width: 479px) {
+      @content;
+    }
+  }
+
+  @if $point == xs {
+    @media screen and (min-width: 479px) {
+      @content;
+    }
+  }
+
+  @if $point == sm {
+    @media screen and (min-width: 576px) {
+      @content;
+    }
+  }
+
+  @if $point == md {
+    @media screen and (min-width: 768px) {
+      @content;
+    }
+  }
+
+  @if $point == lg {
+    @media screen and (min-width: 992px) {
+      @content;
+    }
+  }
+
+  @if $point == xl {
+    @media screen and (min-width: 1200px) {
+      @content;
+    }
+  }
+
+  @if $point == xxl {
+    @media screen and (min-width: 1400px) {
+      @content;
+    }
+  }
+
+  @if $point == landscape {
+    @media only screen and (orientation: landscape) and (max-width: 800px) {
+      @content;
+    }
+  }
+}

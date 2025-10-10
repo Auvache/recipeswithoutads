@@ -1,0 +1,99 @@
+.fade-in {
+    animation: fadeIn 1000ms;
+}
+.fade-in-upsell {
+    animation: fadeInUpsell 1500ms;
+}
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    30% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUpsell {
+    0% {
+        opacity: 0;
+    }
+    80% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.fade-in-up {
+    position: relative;
+    animation: fadeInUp 1000ms;
+}
+.fade-in-up-slow {
+    position: relative;
+    animation: fadeInUp 2000ms;
+}
+@keyframes fadeInUp {
+    0% {
+        top: 300px;
+        opacity: 0;
+    }
+    30% {
+        opacity: 0;
+    }
+    100% {
+        top: 0;
+        opacity: 1;
+    }
+}
+
+
+.fade-in-down {
+    animation: fadeInDown 1000ms;
+}
+@keyframes fadeInDown {
+    0% {
+        top: -300px;
+        opacity: 0;
+    }
+    30% {
+        opacity: 0;
+    }
+    100% {
+        top: 0;
+        opacity: 1;
+    }
+}
+
+.slide-in-down {
+    animation: slideInDown 1000ms;
+}
+@keyframes slideInDown {
+    0% {
+        top: -300px;
+    }
+    100% {
+        top: 0;
+    }
+}
+
+.hidden {
+    height: 0;
+    -webkit-transition: height 0.5s linear;
+    -moz-transition: height 0.5s linear;
+    -ms-transition: height 0.5s linear;
+    -o-transition: height 0.5s linear;
+    transition: height 0.5s linear;
+}
+
+.hidden.open {
+    height: 200px;
+    -webkit-transition: height 0.5s linear;
+    -moz-transition: height 0.5s linear;
+    -ms-transition: height 0.5s linear;
+    -o-transition: height 0.5s linear;
+    transition: height 0.5s linear;
+}

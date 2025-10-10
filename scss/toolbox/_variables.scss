@@ -1,0 +1,311 @@
+// TABLE OF CONTENTS //
+/* COLORS */
+/* FONTS */
+/* BORDERS */
+/* DROP SHADOWS */
+/* ANIMATIONS */
+/* OPTIONS */
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@200;300;400;500;600;700&display=swap');
+
+// Prefix for :root CSS variables
+$variable-prefix:             bs- !default;
+
+/* COLORS */
+/* Use http://chir.ag/projects/name-that-color/ to find a color variable name that's closest to the hex. (https://davidwalsh.name/sass-color-variables-dont-suck) */
+$white: #FFFFFF;
+$black: #000000;
+
+/* Primary Colors */
+$site-primary:   #0e1111;  /* mhn primary blue -- 2021.10 */
+$site-text:      #000000;  /* mhn text -- 2021.10 */
+$site-error:     #E12C27;  /* mhn error -- 2021.10 */
+$site-success:   #00AC49;  /* mhn success text -- 2021.10 */
+$site-warning:   #FEB200;  /* mhn primary warnings -- 2021.10 */
+$site-focus:     #2B89FE;  /* mhn focus background -- 2021.10 */
+$site-link:      #0e1111;  /* mhn focus background -- 2021.10 */
+$site-blue:      #0e1111;
+
+/* Alerts */
+$alert-warning:     #F9F2E0;  /* mhn warning -- 2021.10 */
+$alert-alert:       #FDECEB;  /* mhn alert -- 2021.10 */
+$alert-success:     #E4F2EA;  /* mhn success -- 2021.10 */
+
+/* Blue Collection */
+$blue-ribbon:       #006FE7;  /* mhn link -- 2021.10 */
+$blue-box-fade:     #2B89FE;  /* mhn blue box -- 2021.10 */
+$smalt:             #003B9A;  /* mhn mouse down -- 2021.10 */
+$link-water:        #E6EDF9;  /* mhn active drag and drop -- 2021.10 */
+$hover-bg:          #E6F3FF;  /* mhn hover backdrop -- 2021.10 */
+$pattens-blue:      #DAEBFF;  /* mhn footer link -- 2023.3 */
+
+/* Gray Collection */
+$shuttle-gray:      #576171;  /* mhn disabled state -- 2021.10 */
+$pale-sky:          #6A7789;  /* mhn disabled links -- 2021.10 */
+$dusty-gray:        #949494;  /* mhn ghost text -- 2021.10 */
+$athens-gray:       #E2E5E9;  /* mhn line gray -- 2021.10 */
+$alabaster:         #F9F9F9;  /* mhn background gray -- 2021.10 */
+$darker-blue:       #2C5576;  /* mhn background gray -- 2021.10 */
+
+/* Custom Colors */
+$alto:              #D8D8D8;  /* alto */
+$astronaut:         #253A6C;  /* atronaut */
+$athens-gray:       #E2E5E9;  /* athens gray */
+$azure:             #336699;  /* azure */
+$big-stone:         #182640;  /* big stone */
+$blue-bayoux:       #4D557C;  /* blue bayoux */
+$boulder:           #767676;  /* boulder */
+$cello:             #1f3856;  /* cello */
+$cerulean:          #129FEA;  /* cerulean */
+$concrete:          #F2F2F2;  /* concrete */
+$danube:            #6685CC;  /* danube */
+$dodger-blue-light: #3A99FC;  /* dodger blue light */
+$dodger-blue-dark:  #2B89FF;  /* dodger blue dark */
+$dove-gray:         #717171;  /* dove gray */
+$ebony-clay:        #272F39;  /* ebony clay */
+$fiord:             #3f5066;  /* fiord */
+$foam:              #F3F9FE;  /* foam */
+$gallery:           #EFEFEF;  /* gallery */
+$ghost:             #CAD0D7;  /* ghost */
+$gray-chateau:      #989FA3;  /* gray chateau */
+$hawkes-blue:       #F0F5FE;  /* hawkes blue */
+$lucky-point:       #192666;  /* lucky point */
+$lynch:             #708399;  /* lynch */
+$mercury:           #e2e2e2;  /* mercury */
+$mine-shaft:        #222222;  /* mine shaft */
+$periwinkle:        #C6DCFF;  /* periwinkle */
+$persian-blue:      #1D53BD;  /* persian blue */
+$pickled-bluewood:  #35495F;  /* slate blue text */
+$porcelain:         #F6F7F8;  /* porcelain */
+$port-gore:         #212352;  /* port gore */
+$rhino:             #333366;  /* purple */
+$san-marino:        #3F73A9;  /* san marino */
+$scorpion:          #575757;  /* scorpion */
+$seashell:          #F1F1F1;  /* seashell */
+$sea-buckthorn:     #f9a132;  /* sea buckthorn */
+$shamrock:          #38D591;  /* shamrock */
+$silver:            #CCCCCC;  /* silver */
+$silver-chalice:    #A1A1A1;  /* silver chalice */
+$solitude:          #E7F2FF;  /* solitude */
+$st-tropaz:         #2A6096;  /* st tropaz */
+$steel-blue:        #4682B4;  /* steel blue */
+$tradewind:         #4AAE9B;  /* tradewind green */
+$tundora:           #444444;  /* tundora */
+$vanilla-ice:       #F7E7E9;  /* vanilla ice */
+$venice-blue:       #06647D;  /* venice blue */
+$dark-blue:         #324569;
+$light-blue:        #EDF5FF ;  /* venice blue */
+$lighter-blue:      #A3D2FF ;  /* venice blue */
+$light-gray:        #F0F0F1 ;  /* venice blue */
+$yellow:            #F4CA55 ;  /* yellow */
+$off-black:         #232b2b ;  /* off black */
+$off-black-2:       #0e1111 ;  /* off black 2 */
+
+// Body
+//
+// Settings for the `<body>` element.
+
+$body-bg:                     $white !default;
+$body-color:                  $site-text !default;
+$body-text-align:             null !default;
+
+
+// Typography
+//
+// Font, line-height, and color for body text, headings, and more.
+
+$spacer:                      1rem;
+$font-family-sans-serif:      'Lexend', sans-serif !default;
+$font-family-monospace:       SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
+$font-family-base:            $font-family-sans-serif !default;
+$font-family-code:            var(--#{$variable-prefix}font-monospace) !default;
+
+$font-weight-base:            400 !default;
+
+$font-weight-thin:            200 !default;
+$font-weight-light:           300 !default;
+$font-weight-normal:          $font-weight-base !default;
+$font-weight-slightlybold:    400 !default;
+$font-weight-medium:          500 !default;
+$font-weight-semibold:        600 !default;
+$font-weight-bold:            700 !default;
+
+.strong-medium {
+  font-weight:                $font-weight-semibold;
+}
+
+// $font-size-root affects the value of `rem`, which is used for font sizes, paddings, and margins
+// $font-size-base affects the font size of the body text
+$font-size-root:              null !default;
+$font-size-base:              1rem !default; // Assumes the browser default, typically `16px`
+$font-size-lg:                $font-size-base * 1.25 !default;
+$font-size-sm:                $font-size-base * .875 !default;
+
+$line-height-base:            1.5 !default;  // `24px`
+$line-height-sm:              1.25 !default;
+$line-height-lg:              2 !default;
+
+// scss-docs-start headings-variables
+$headings-margin-bottom:      $spacer * .5 !default;
+$headings-font-family:        null !default;
+$headings-font-style:         null !default;
+$headings-font-weight:        500 !default;
+$headings-line-height:        1.2 !default;
+$headings-color:              null !default;
+// scss-docs-end headings-variables
+
+// Custom fonts
+// @font-face {
+//     font-family: 'Glyphicons Halflings';
+// 	  src: url('../bootstrap/fonts/glyphicons-halflings-regular.eot');
+// 	  src: url('../bootstrap/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
+//          url('../bootstrap/fonts/glyphicons-halflings-regular.woff2') format('woff2'),
+//          url('../bootstrap/fonts/glyphicons-halflings-regular.woff') format('woff'),
+//          url('../bootstrap/fonts/glyphicons-halflings-regular.ttf') format('truetype'),
+//          url('../bootstrap/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+// }
+
+$font-family-glyphs: 'Glyphicons Halflings';
+
+.glyphicon {
+  position: relative;
+  top: 0;
+  display: inline-block;
+  font-family: $font-family-glyphs;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.glyphicon-chevron-right:before {
+  content: "\e080";
+}
+.glyphicon-menu-left:before {
+  content: "\e257";
+}
+.glyphicon-menu-right:before {
+  content: "\e258";
+}
+.glyphicon-menu-down:before {
+  content: "\e259";
+}
+.glyphicon-menu-up:before {
+  content: "\e260";
+}
+
+// Links
+//
+// Style anchor elements.
+
+$link-color:                        #2B89FE;
+$link-decoration:                   none !default;
+$link-hover-color:                  $black;
+$link-hover-decoration:             underline !default;
+// Darken percentage for links with `.text-*` class (e.g. `.text-success`)
+$link-hover-darken-percentage:      15% !default;
+
+$stretched-link-pseudo-element:     after !default;
+$stretched-link-z-index:            1 !default;
+
+// Paragraphs
+//
+// Style p element.
+$paragraph-margin-bottom:   1rem !default;
+
+
+/* BORDERS */
+$border-width:              1px !default;
+$border-color:              $athens-gray !default;
+
+$border-radius:             .25rem !default;
+$border-radius-lg:          .3rem !default;
+$border-radius-sm:          .2rem !default;
+
+$hr-margin-y:               $spacer !default;
+$hr-color:                  inherit !default;
+$hr-height:                 $border-width !default;
+$hr-opacity:                .25 !default;
+
+
+/* DROP SHADOWS */
+$box-shadow-sm:             1px 2px 3px -2px rgba($site-text, 0.45) !default;
+$box-shadow:                0 3px 6px -2px rgba($site-text, 0.45) !default;
+$box-shadow-lg:             0 8px 10px -4px rgba($site-text, 0.45) !default;
+$box-shadow-xl:             0 12px 24px -8px rgba($site-text, 0.45) !default;
+$box-shadow-cards:          0px 8px 16px -2px rgb(33 47 69 / 16%) !default;
+
+
+/* ANIMATIONS */
+$duration: 500ms;
+
+/* TRANSITIONS */
+$transition-base:             all .2s ease-in-out !default;
+$transition-fade:             opacity .15s linear !default;
+$transition-collapse:         height .35s ease !default;
+$transition:                  600ms cubic-bezier(0.175, 0.885, 0.305, 1.080);
+$transition-delay:            600ms cubic-bezier(0.175, 0.885, 0.305, 1.080) 250ms;
+
+
+/* OPTIONS */
+//
+// Quickly modify global styling by enabling or disabling optional features.
+
+$enable-pointer-cursor-for-buttons:           true !default;
+$enable-print-styles:                         true !default;
+
+// Tables
+//
+// Customizes the `.table` component with basic values, each used across all table variations.
+
+// scss-docs-start table-variables
+$table-cell-padding-y:        .5rem !default;
+$table-cell-padding-x:        .5rem !default;
+$table-cell-padding-y-sm:     .25rem !default;
+$table-cell-padding-x-sm:     .25rem !default;
+
+$table-cell-vertical-align:   top !default;
+
+$table-color:                 $body-color !default;
+$table-bg:                    transparent !default;
+$table-accent-bg:             transparent !default;
+
+$table-th-font-weight:        null !default;
+
+$table-striped-color:         $table-color !default;
+$table-striped-bg-factor:     .05 !default;
+$table-striped-bg:            rgba($black, $table-striped-bg-factor) !default;
+
+$table-active-color:          $table-color !default;
+$table-active-bg-factor:      .1 !default;
+$table-active-bg:             rgba($black, $table-active-bg-factor) !default;
+
+$table-hover-color:           $table-color !default;
+$table-hover-bg-factor:       .075 !default;
+$table-hover-bg:              rgba($black, $table-hover-bg-factor) !default;
+
+$table-border-factor:         .1 !default;
+$table-border-width:          $border-width !default;
+$table-border-color:          $border-color !default;
+
+$table-striped-order:         odd !default;
+
+$table-group-separator-color: currentColor !default;
+
+$table-caption-color:         $shuttle-gray !default;
+
+$table-bg-scale:              -80% !default;
+
+
+// Forms
+$label-margin-bottom:       .5rem !default;
+
+// Body size
+$body-content-width:        1500px !default;
+$body-content-medium:        1200px !default;
+$body-content-thin:        900px !default;
+$body-content-thinnest:        600px !default;
+$body-content-max-width:        95% !default;
+
+//accessibility
+$outline: 3px solid $black;
+

@@ -1,0 +1,22 @@
+/* ASPECT RATIO */
+// 
+// Affect aspect ratio
+
+@mixin aspect-ratio($width, $height) {
+    position: relative;
+
+    &:before {
+        content: "";
+        display: block;
+        padding-top: $height * 100%;
+        width: 100%;
+    }
+
+    > .shim-content {
+        bottom: 0;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+}

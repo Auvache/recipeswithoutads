@@ -1,0 +1,24 @@
+.media-query-check {
+    display: none;
+    height: 1px;
+
+    @include breakpoint(sm) {
+        height: 2px;
+    }
+
+    @include breakpoint(md) {
+        height: 3px;
+    }
+
+    @include breakpoint(lg) {
+        height: 4px;
+    }
+
+    @include breakpoint(xl) {
+        height: 5px;
+    }
+
+    @include breakpoint(xxl) {
+        height: 6px;
+    }
+}

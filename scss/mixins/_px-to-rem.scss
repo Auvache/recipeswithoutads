@@ -1,0 +1,12 @@
+//
+// PX to REM
+// 
+// Cnovert font-size (px) to font-size (rem)
+// https://www.aleksandrhovhannisyan.com/blog/fluid-type-scale-with-css-clamp/
+
+@use 'sass:math';
+
+@function to-rems($px) {
+    $rems: math.div($px, 16px) * 1rem;
+    @return $rems;
+}

@@ -1,0 +1,31 @@
+#posts {
+  display: block;
+  .post-container {
+    margin: 0 0 3rem;
+    width: 100%;
+    .tagline {
+      margin: 0.5rem 0;
+    }
+    .post-image {
+      max-width: 100%;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      height: auto;
+      margin: 1rem 0;
+      opacity: 1;
+      transition: all 500ms;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+
+  }
+}
+
+#post {
+  img {
+    border: 1px solid transparent;
+    border-radius: 8px;
+  }
+}

@@ -1,0 +1,38 @@
+// FLUID-TYPE mixin
+// Enables fluid font scaling between min/max sizes within min/max viewports
+// USAGE: // call mixin (min font-size in px, max font-size in px, min viewport in px, max viewport in px) 
+// Example: @include fluidFont(36px, 52px, 600px, 1400px);
+// Credits: https://www.aleksandrhovhannisyan.com/blog/fluid-type-scale-with-css-clamp/
+
+@use 'sass:math';
+@use "sass:map";
+
+$media-breakpoints: (
+  x-small: 0,
+  small: 576px,
+  medium: 768px,
+  large: 992px,
+  x-large: 1200px,
+  xx-large: 1400px,
+);
+
+$default-min-bp: map.get($media-breakpoints, "small");
+$default-max-bp: map.get($media-breakpoints, "large");
+
+@function fluidProp($min-px, $max-px, $min-bp: $default-min-bp, $max-bp: $default-max-bp) {
+
+    // Get the slope of the line between min and max
+    $slope: math.div($max-px - $min-px, $max-bp - $min-bp);
+
+    // Multiply it by 100 to get a percentage for the viewport
+    $slope-vw: rnd($slope * 100, 2);
+
+    // Get the y-intercept of the sloped line
+    $intercept-rems: rnd(to-rems($min-px - $slope * $min-bp), 2);
+
+    // Convert min and max to rems
+    $min-rems: rnd(to-rems($min-px), 2);
+    $max-rems: rnd(to-rems($max-px), 2);
+
+    @return clamp(#{$min-rems}, #{$slope-vw}vw + #{$intercept-rems}, #{$max-rems});
+}

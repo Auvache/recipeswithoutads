@@ -1,0 +1,9 @@
+/* VERTICAL ALIGN */
+// 
+// Affect vertical alignment
+
+@mixin vertical-align-top($position: relative) {
+    position: $position;
+    top: 50%;
+    @include prefix((transform: (translateY(-50%))), webkit ms);
+}

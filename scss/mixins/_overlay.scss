@@ -1,0 +1,14 @@
+/* OVERLAY */
+// 
+// Apply overlay
+
+@mixin overlay($color) {
+    &:after {
+        background: $color;
+    }
+
+    &.overlay-left.add-arrow .content:after,
+    &.overlay-right.add-arrow .content:before {
+        border-color: transparent $color;
+    }
+}

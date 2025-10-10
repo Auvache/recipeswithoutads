@@ -1,0 +1,28 @@
+/* KEYFRAMES */
+// Apply vendor prefixes to animation keyframes
+// https://golightlyplus.com/vendor-prefixes-for-css3-animations-using-scss/
+
+/* Usage
+@include keyframes(my-transition) {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+*/
+
+@mixin keyframes($animation-name) {
+    @-webkit-keyframes #{$animation-name} {
+        @content;
+    }
+    // @-moz-keyframes #{$animation-name} {
+    //     @content;
+    // }
+    // @-ms-keyframes #{$animation-name} {
+    //     @content;
+    // }
+    // @-o-keyframes #{$animation-name} {
+    //     @content;
+    // }
+    @keyframes #{$animation-name} {
+        @content;
+    }
+}
