@@ -117,6 +117,7 @@ const { title, description, image, ingredients, steps, servings, time, tags } = 
   if (copyBtn) {
     copyBtn.addEventListener('click', async () => {
       const ingredientsList = document.getElementById('ingredients-list');
+      if (!ingredientsList) return;
       const ingredients = Array.from(ingredientsList.querySelectorAll('.ingredient-text'))
       .map(el => el.textContent)
       .join('\n');
