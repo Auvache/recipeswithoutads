@@ -1,0 +1,358 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import RecipeSchema from '../../components/RecipeSchema.astro';
+
+export async function getStaticPaths() {
+  const recipes = await getCollection('recipes');
+  return recipes.map(recipe => ({
+    params: { slug: recipe.slug },
+    props: { recipe }
+  }));
+}
+
+const { recipe } = Astro.props;
+const { Content } = await recipe.render();
+const { title, description, image, ingredients, steps, servings, time, tags } = recipe.data;
+---
+
+<Layout
+		title={title}
+		description={description}
+		image={image}
+		type="article"
+>
+	<RecipeSchema recipe={recipe} />
+
+	<article class="recipe-detail">
+		<div class="recipe-header">
+			<div class="container-narrow">
+				<h1>{title}</h1>
+				<div class="recipe-image-wrapper">
+					<img
+							src={image}
+							alt={title}
+							class="recipe-hero-image"
+							width="1200"
+							height="800"
+					/>
+				</div>
+				<p class="recipe-description">{description}</p>
+
+				<div class="recipe-meta-bar">
+					<div class="meta-item">
+						<span class="meta-label">Prep:</span>
+						<span class="meta-value">{time.prep}</span>
+					</div>
+					<div class="meta-item">
+						<span class="meta-label">Cook:</span>
+						<span class="meta-value">{time.cook}</span>
+					</div>
+					<div class="meta-item">
+						<span class="meta-label">Total:</span>
+						<span class="meta-value">{time.total}</span>
+					</div>
+					<div class="meta-item">
+						<span class="meta-label">Servings:</span>
+						<span class="meta-value">{servings}</span>
+					</div>
+				</div>
+
+				<div class="recipe-tags">
+          {tags.map(tag => (
+							<span class="tag">{tag}</span>
+          ))}
+				</div>
+			</div>
+		</div>
+
+		<div class="recipe-content">
+			<div class="container-narrow">
+				<div class="recipe-grid-layout">
+					<section class="ingredients-section">
+						<h2>Ingredients</h2>
+						<ul class="ingredients-list" id="ingredients-list">
+              {ingredients.map((ingredient, index) => (
+									<li>
+										<label class="ingredient-item">
+											<input type="checkbox" class="ingredient-checkbox" />
+											<span class="ingredient-text">{ingredient}</span>
+										</label>
+									</li>
+              ))}
+						</ul>
+						<button
+								type="button"
+								class="btn btn-secondary copy-ingredients-btn"
+								id="copy-ingredients"
+						>
+							📋 Copy Ingredients
+						</button>
+					</section>
+
+					<section class="instructions-section">
+						<h2>Instructions</h2>
+						<ol class="instructions-list">
+              {steps.map(step => (
+									<li>{step}</li>
+              ))}
+						</ol>
+					</section>
+				</div>
+
+        {recipe.body && (
+						<div class="recipe-notes">
+							<h2>Notes</h2>
+							<Content />
+						</div>
+        )}
+			</div>
+		</div>
+	</article>
+</Layout>
+
+<script>
+  // Copy ingredients functionality
+  const copyBtn = document.getElementById('copy-ingredients');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', async () => {
+      const ingredientsList = document.getElementById('ingredients-list');
+      const ingredients = Array.from(ingredientsList.querySelectorAll('.ingredient-text'))
+      .map(el => el.textContent)
+      .join('\n');
+
+      try {
+        await navigator.clipboard.writeText(ingredients);
+        copyBtn.textContent = '✓ Copied!';
+        setTimeout(() => {
+          copyBtn.textContent = '📋 Copy Ingredients';
+        }, 2000);
+      } catch (err) {
+        console.error('Failed to copy:', err);
+      }
+    });
+  }
+</script>
+
+<style>
+    .recipe-detail {
+        margin-bottom: var(--space-3xl);
+    }
+
+    .recipe-header {
+        background: var(--color-bg-alt);
+        padding: var(--space-2xl) 0;
+    }
+
+    .recipe-header h1 {
+        font-size: 2.5rem;
+        margin-bottom: var(--space-md);
+    }
+
+    .recipe-description {
+        font-size: 1.25rem;
+        color: var(--color-text-light);
+        margin-bottom: var(--space-xl);
+    }
+
+    .recipe-meta-bar {
+        display: flex;
+        gap: var(--space-xl);
+        flex-wrap: wrap;
+        margin-bottom: var(--space-lg);
+        padding: var(--space-lg);
+        background: white;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .meta-item {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-xs);
+    }
+
+    .meta-label {
+        font-size: 0.875rem;
+        color: var(--color-text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .meta-value {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--color-text);
+    }
+
+    .recipe-tags {
+        display: flex;
+        gap: var(--space-sm);
+        flex-wrap: wrap;
+    }
+
+    .tag {
+        background: white;
+        color: var(--color-text);
+        padding: var(--space-sm) var(--space-md);
+        border-radius: var(--radius);
+        font-size: 0.875rem;
+        font-weight: 500;
+    }
+
+    .recipe-image-wrapper {
+        margin: var(--space-2xl) 0;
+    }
+
+    .recipe-hero-image {
+        width: 100%;
+        margin: 0 auto;
+        display: block;
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .recipe-content {
+        padding: var(--space-2xl) 0;
+    }
+
+    .recipe-grid-layout {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: var(--space-3xl);
+        margin-bottom: var(--space-3xl);
+    }
+
+    .ingredients-section h2,
+    .instructions-section h2 {
+        margin-bottom: var(--space-lg);
+    }
+
+    .ingredients-list {
+        list-style: none;
+        margin-bottom: var(--space-lg);
+    }
+
+    .ingredient-item {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--space-sm);
+        padding: var(--space-sm) 0;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .ingredient-checkbox {
+        margin-top: 0.25rem;
+        cursor: pointer;
+        min-width: 18px;
+    }
+
+    .ingredient-checkbox:checked + .ingredient-text {
+        text-decoration: line-through;
+        opacity: 0.6;
+    }
+
+    .ingredient-text {
+        flex: 1;
+    }
+
+    .copy-ingredients-btn {
+        width: 100%;
+    }
+
+    .instructions-list {
+        counter-reset: step-counter;
+        list-style: none;
+        padding: 0;
+    }
+
+    .instructions-list li {
+        counter-increment: step-counter;
+        position: relative;
+        padding-left: var(--space-3xl);
+        margin-bottom: var(--space-xl);
+        line-height: 1.8;
+    }
+
+    .instructions-list li::before {
+        content: counter(step-counter);
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 2rem;
+        height: 2rem;
+        background: var(--color-primary);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 0.875rem;
+    }
+
+    .recipe-notes {
+        background: var(--color-bg-alt);
+        padding: var(--space-xl);
+        border-radius: var(--radius-lg);
+        border-left: 4px solid var(--color-primary);
+    }
+
+    @media (max-width: 768px) {
+        .recipe-header h1 {
+            font-size: 2rem;
+        }
+
+        .recipe-description {
+            font-size: 1rem;
+        }
+
+        .recipe-meta-bar {
+            gap: var(--space-md);
+        }
+
+        .recipe-grid-layout {
+            grid-template-columns: 1fr;
+            gap: var(--space-2xl);
+        }
+
+        .instructions-list li {
+            padding-left: var(--space-2xl);
+        }
+
+        .instructions-list li::before {
+            width: 1.5rem;
+            height: 1.5rem;
+            font-size: 0.75rem;
+        }
+    }
+
+    /* Print styles */
+    @media print {
+        .recipe-header {
+            background: white;
+        }
+
+        .recipe-hero-image {
+            max-height: 400px;
+            object-fit: cover;
+        }
+
+        .copy-ingredients-btn {
+            display: none;
+        }
+
+        .ingredient-checkbox {
+            display: none;
+        }
+
+        .ingredient-item {
+            padding-left: 0;
+        }
+
+        .instructions-list li {
+            page-break-inside: avoid;
+        }
+    }
+</style>

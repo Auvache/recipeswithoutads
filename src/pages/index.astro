@@ -1,0 +1,98 @@
+---
+import Layout from '../layouts/Layout.astro';
+import RecipeCard from '../components/RecipeCard.astro';
+import Search from '../components/Search.astro';
+import { getCollection } from 'astro:content';
+
+const recipes = await getCollection('recipes');
+const sortedRecipes = recipes.sort((a, b) =>
+  new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+---
+
+<Layout
+		title="Recipes Without Ads"
+		description="Simple, delicious recipes without ads, tracking, or distractions. Just good food."
+>
+	<div class="hero">
+		<div class="container">
+			<h1>Recipes Without Ads</h1>
+			<p class="hero-subtitle">
+				Simple, delicious recipes. No ads, no tracking, no life stories.<br>
+				Just the recipe you're looking for.
+			</p>
+		</div>
+	</div>
+
+	<div class="container">
+		<!--<Search recipes={sortedRecipes} />-->
+
+		<div class="recipe-grid" id="recipe-grid">
+      {sortedRecipes.map((recipe) => (
+					<RecipeCard recipe={recipe} />
+      ))}
+		</div>
+
+		<div id="no-results" class="no-results" style="display: none;">
+			<p>No recipes found matching your search.</p>
+			<button onclick="document.getElementById('search-input').value = ''; document.getElementById('search-input').dispatchEvent(new Event('input'));" class="btn btn-secondary">
+				Clear Search
+			</button>
+		</div>
+	</div>
+</Layout>
+
+<style>
+    .hero {
+        background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary) 100%);
+        color: white;
+        padding: var(--space-3xl) 0;
+        text-align: center;
+        margin-bottom: var(--space-3xl);
+    }
+
+    .hero h1 {
+        font-size: 3rem;
+        margin-bottom: var(--space-md);
+        color: white;
+    }
+
+    .hero-subtitle {
+        font-size: 1.25rem;
+        opacity: 0.95;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .recipe-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: var(--space-xl);
+        margin-top: var(--space-xl);
+    }
+
+    .no-results {
+        text-align: center;
+        padding: var(--space-3xl) var(--space-lg);
+    }
+
+    .no-results p {
+        font-size: 1.25rem;
+        color: var(--color-text-light);
+        margin-bottom: var(--space-lg);
+    }
+
+    @media (max-width: 768px) {
+        .hero h1 {
+            font-size: 2rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+        }
+
+        .recipe-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

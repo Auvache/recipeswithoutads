@@ -1,0 +1,118 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+		title="FAQ"
+		description="Frequently asked questions about Recipes Without Ads - printing, measurements, and more."
+>
+	<div class="page-content">
+		<div class="container-narrow">
+			<h1>Frequently Asked Questions</h1>
+
+			<div class="faq-list">
+
+				<div class="faq-item">
+					<h2>Why don't you have ads?</h2>
+					<p>
+						Because we don't need them! This site is simple, static, and costs very
+						little to run. We'd rather provide a great experience than monetize through
+						intrusive advertising.
+					</p>
+				</div>
+
+				<div class="faq-item">
+					<h2>Can I adjust serving sizes?</h2>
+					<p>
+						Currently, recipes show the original serving size. To adjust, you'll need to
+						calculate the proportions manually. We may add an automatic scaling feature
+						in the future!
+					</p>
+				</div>
+
+				<div class="faq-item">
+					<h2>Do you have metric measurements?</h2>
+					<p>
+						Most recipes use imperial measurements (cups, tablespoons, etc.). For metric
+						conversions, we recommend using an online converter. Common conversions:
+					</p>
+					<ul>
+						<li>1 cup = 240ml</li>
+						<li>1 tablespoon = 15ml</li>
+						<li>1 teaspoon = 5ml</li>
+						<li>1 pound = 454g</li>
+						<li>350°F = 175°C</li>
+					</ul>
+				</div>
+
+				<div class="faq-item">
+					<h2>Do you track my data?</h2>
+					<p>
+						No. We don't use any analytics, tracking pixels, cookies, or third-party
+						scripts. See our <a href="/privacy/">privacy policy</a> for more details.
+					</p>
+				</div>
+
+				<div class="faq-item">
+					<h2>Can I suggest improvements to the site?</h2>
+					<p>
+						Maybe someday.
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</Layout>
+
+<style>
+    .page-content {
+        padding: var(--space-3xl) 0;
+    }
+
+    .page-content h1 {
+        margin-bottom: var(--space-3xl);
+    }
+
+    .faq-list {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-2xl);
+    }
+
+    .faq-item {
+        padding-bottom: var(--space-2xl);
+        border-bottom: 1px solid var(--color-border-light);
+    }
+
+    .faq-item:last-child {
+        border-bottom: none;
+    }
+
+    .faq-item h2 {
+        color: var(--color-primary);
+        font-size: 1.5rem;
+        margin-bottom: var(--space-md);
+    }
+
+    .faq-item p {
+        font-size: 1.125rem;
+        line-height: 1.8;
+        color: var(--color-text-light);
+        margin-bottom: var(--space-md);
+    }
+
+    .faq-item p:last-child {
+        margin-bottom: 0;
+    }
+
+    .faq-item ul {
+        margin-left: var(--space-xl);
+        margin-top: var(--space-md);
+    }
+
+    .faq-item li {
+        margin-bottom: var(--space-sm);
+        color: var(--color-text-light);
+        font-size: 1.125rem;
+    }
+</style>

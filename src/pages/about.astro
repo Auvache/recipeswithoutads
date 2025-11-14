@@ -1,0 +1,77 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+		title="About"
+		description="Learn about Recipes Without Ads - our mission to provide simple, accessible recipes without distractions."
+>
+	<div class="page-content">
+		<div class="container-narrow">
+			<h1>About Recipes Without Ads</h1>
+
+			<section class="content-section">
+				<h2>Our Mission</h2>
+				<p>
+					We believe recipes should be simple, accessible, and free from distractions.
+					No ads, no tracking, no life stories before the recipe. Just good food.
+				</p>
+			</section>
+
+			<section class="content-section">
+				<h2>What Makes Us Different</h2>
+				<ul class="feature-list">
+					<li><strong>No Ads:</strong> We'll never show you advertisements. Ever.</li>
+					<li><strong>No Tracking:</strong> We don't use analytics, cookies, or any tracking technology.</li>
+					<li><strong>No Distractions:</strong> Get straight to the recipe. No lengthy stories or pop-ups.</li>
+					<li><strong>Fast & Accessible:</strong> Lightning-fast load times and fully accessible to everyone.</li>
+				</ul>
+			</section>
+		</div>
+	</div>
+</Layout>
+
+<style>
+    .page-content {
+        padding: var(--space-3xl) 0;
+    }
+
+    .page-content h1 {
+        margin-bottom: var(--space-2xl);
+    }
+
+    .content-section {
+        margin-bottom: var(--space-3xl);
+    }
+
+    .content-section h2 {
+        color: var(--color-primary);
+        margin-bottom: var(--space-lg);
+    }
+
+    .content-section p {
+        font-size: 1.125rem;
+        line-height: 1.8;
+        color: var(--color-text-light);
+    }
+
+    .feature-list {
+        list-style: none;
+        padding: 0;
+    }
+
+    .feature-list li {
+        padding: var(--space-md) 0;
+        border-bottom: 1px solid var(--color-border-light);
+        font-size: 1.125rem;
+        line-height: 1.6;
+    }
+
+    .feature-list li:last-child {
+        border-bottom: none;
+    }
+
+    .feature-list strong {
+        color: var(--color-primary);
+    }
+</style>

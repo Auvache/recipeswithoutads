@@ -1,0 +1,116 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  recipes: CollectionEntry<'recipes'>[];
+}
+
+const { recipes } = Astro.props;
+
+// Build search index
+const searchIndex = recipes.map(recipe => ({
+  slug: recipe.slug,
+  title: recipe.data.title,
+  description: recipe.data.description,
+  tags: recipe.data.tags,
+  ingredients: recipe.data.ingredients
+}));
+---
+
+<div class="search-container">
+	<div class="search-box">
+		<label for="search-input" class="search-label">Search recipes</label>
+		<input
+				type="search"
+				id="search-input"
+				class="search-input"
+				placeholder="Search by title, ingredient, or tag..."
+				aria-label="Search recipes"
+				aria-describedby="search-results-count"
+		/>
+	</div>
+	<div id="search-results-count" class="search-results-count" aria-live="polite" aria-atomic="true"></div>
+</div>
+
+<script define:vars={{ searchIndex }}>
+  let fuseInstance = null;
+  let isInitialized = false;
+
+  async function initializeSearch() {
+    if (isInitialized) return;
+
+    // Lazy load Fuse.js
+    const Fuse = (await import('fuse.js')).default;
+
+    fuseInstance = new Fuse(searchIndex, {
+      keys: ['title', 'tags', 'ingredients', 'description'],
+      threshold: 0.3,
+      ignoreLocation: true
+    });
+
+    isInitialized = true;
+  }
+
+  const searchInput = document.getElementById('search-input');
+  const recipeGrid = document.getElementById('recipe-grid');
+  const noResults = document.getElementById('no-results');
+  const resultsCount = document.getElementById('search-results-count');
+
+  let debounceTimer;
+
+  searchInput.addEventListener('focus', () => {
+    initializeSearch();
+  }, { once: true });
+
+  searchInput.addEventListener('input', (e) => {
+    clearTimeout(debounceTimer);
+
+    debounceTimer = setTimeout(() => {
+      const query = e.target.value.trim();
+
+      if (!query) {
+        // Show all recipes
+        const cards = recipeGrid.querySelectorAll('.recipe-card');
+        cards.forEach(card => card.style.display = 'block');
+        noResults.style.display = 'none';
+        resultsCount.textContent = '';
+        return;
+      }
+
+      if (!isInitialized) {
+        initializeSearch().then(() => performSearch(query));
+      } else {
+        performSearch(query);
+      }
+    }, 300);
+  });
+
+  function performSearch(query) {
+    const results = fuseInstance.search(query);
+    const matchingSlugs = new Set(results.map(r => r.item.slug));
+
+    const cards = recipeGrid.querySelectorAll('.recipe-card');
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+      const link = card.querySelector('a');
+      const href = link.getAttribute('href');
+      const slug = href.replace('/recipes/', '').replace('/', '');
+
+      if (matchingSlugs.has(slug)) {
+        card.style.display = 'block';
+        visibleCount++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    if (visibleCount === 0) {
+      noResults.style.display = 'block';
+      resultsCount.textContent = 'No recipes found';
+    } else {
+      noResults.style.display = 'none';
+      resultsCount.textContent = `${visibleCount} recipe${visibleCount !== 1 ? 's' : ''} found`;
+    }
+  }
+</script>

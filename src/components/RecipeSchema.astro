@@ -1,0 +1,35 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  recipe: CollectionEntry<'recipes'>;
+}
+
+const { recipe } = Astro.props;
+const { title, description, image, ingredients, steps, servings, time, date, author } = recipe.data;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Recipe",
+  "name": title,
+  "description": description,
+  "image": new URL(image, Astro.site).toString(),
+  "author": {
+    "@type": "Person",
+    "name": author
+  },
+  "datePublished": date,
+  "recipeYield": servings.toString(),
+  "prepTime": time.prep,
+  "cookTime": time.cook,
+  "totalTime": time.total,
+  "recipeIngredient": ingredients,
+  "recipeInstructions": steps.map((step, index) => ({
+    "@type": "HowToStep",
+    "position": index + 1,
+    "text": step
+  }))
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

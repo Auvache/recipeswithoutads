@@ -1,0 +1,120 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  recipe: CollectionEntry<'recipes'>;
+}
+
+const { recipe } = Astro.props;
+const { title, image, description, tags, time } = recipe.data;
+---
+
+<article class="recipe-card">
+	<a href={`/recipes/${recipe.slug}/`} class="recipe-card-link">
+		<img
+				src={image}
+				alt={title}
+				class="recipe-card-image"
+				loading="lazy"
+				width="400"
+				height="300"
+		/>
+		<div class="recipe-card-content">
+			<h2 class="recipe-card-title">{title}</h2>
+			<p class="recipe-card-description">{description}</p>
+			<div class="recipe-card-meta">
+				<span class="recipe-time">⏱️ {time.total}</span>
+				<div class="recipe-tags">
+          {tags.slice(0, 2).map(tag => (
+							<span class="tag">{tag}</span>
+          ))}
+				</div>
+			</div>
+		</div>
+	</a>
+</article>
+
+<style>
+    .recipe-card {
+        background: var(--color-bg);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        box-shadow: var(--shadow-md);
+        transition: all var(--transition);
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .recipe-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .recipe-card-link {
+        text-decoration: none;
+        color: inherit;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .recipe-card-image {
+        width: 100%;
+        aspect-ratio: 4/3;
+        object-fit: cover;
+        display: block;
+    }
+
+    .recipe-card-content {
+        padding: var(--space-lg);
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .recipe-card-title {
+        font-size: 1.25rem;
+        margin-bottom: var(--space-sm);
+        color: var(--color-text);
+    }
+
+    .recipe-card-description {
+        color: var(--color-text-light);
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin-bottom: var(--space-md);
+        flex: 1;
+    }
+
+    .recipe-card-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: var(--space-sm);
+        flex-wrap: wrap;
+    }
+
+    .recipe-time {
+        font-size: 0.875rem;
+        color: var(--color-text-muted);
+        display: flex;
+        align-items: center;
+        gap: var(--space-xs);
+    }
+
+    .recipe-tags {
+        display: flex;
+        gap: var(--space-xs);
+        flex-wrap: wrap;
+    }
+
+    .tag {
+        background: var(--color-bg-alt);
+        color: var(--color-text-light);
+        padding: var(--space-xs) var(--space-sm);
+        border-radius: var(--radius-sm);
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+</style>

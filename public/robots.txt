@@ -1,6 +1,4 @@
-# /robots.txt file for https://www.recipeswithoutads.com/
-
 User-agent: *
-Disallow: /include/
+Allow: /
 
-Sitemap: https://www.recipeswithoutads.com/sitemap.xml
+Sitemap: https://recipeswithoutads.com/sitemap.xml
